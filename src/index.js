@@ -1,1 +1,5 @@
-console.log('funcionaaaaaaaaaaa')
+import mainElements from './main-content.js';
+import './reset.css';
+import './style.css';
+
+mainElements.skeletonContent(); 

@@ -1,0 +1,106 @@
+:root {
+    --header-height: 150px;
+    --text-color: white;
+    --secondary-text-color: black;
+    --text-font: NotoSans-Bold;
+}
+
+@font-face {
+    font-family: 'NotoSans-Bold';
+    src: url('./components/main-content/NotoSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'NotoSans-SemiBold';
+    src: url('./components/main-content/NotoSans-SemiBold.ttf');
+}
+
+body{
+    margin-bottom: 20px;
+}
+
+div#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    height: var(--header-height);
+    margin: 50px;   
+    display: flex;
+    justify-content: center;
+    
+}
+
+.title-image{
+    max-width: 100%;
+    height:  var(--header-height);
+}
+
+div#navigation-bar-container {
+    border: 5px black;
+    border-style: solid none;
+}
+
+div#navigation-bar-container nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+div#navigation-bar-container nav ul li {
+    padding: 10px;
+    font-family: NotoSans-Bold;
+}
+
+div#navigation-bar-container nav ul li a {
+    text-decoration: none;
+    color: var(--secondary-text-color, black);
+    width: 100%;
+    height: 100%;
+}
+
+div.main-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 350px;
+    height: 400px;
+    color: var(--text-color, white);
+    background: var(--background-items-color, black );
+    margin: 40px;
+    padding: 30px;
+    border-radius: 30%;
+}
+
+div.main-text-container p {
+    padding: 5px;
+    width: 50%;
+    font-size: 11px;
+    font-family: NotoSans-Bold;
+    line-height: 1.4;
+}
+
+footer#static-footer {
+    position: fixed;
+    width: 100%;
+    height: 20px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    padding: 10px 0;
+    background-color: black;
+    color: var(--text-color, white);
+    text-align: right;
+    font-family: var(--text-font);
+}
+
+footer#static-footer a {
+    padding: 0 20px ;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 9px;
+}
