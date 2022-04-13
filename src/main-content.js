@@ -1,4 +1,5 @@
 import titleImg from './components/title/saleepepe-title.png'
+import menuContent from './menu-content';
 
 const mainWelcome = [["Your culinary experience begins as you step foot inside our old stone farmhouse. A perfectly rustic setting, for a thoughtful, local and robust culinary adventure."],
 ["Our space is divided into private dining rooms, proving a quaint and cozy setting for dining or celebrating together."],
@@ -7,11 +8,31 @@ const mainWelcome = [["Your culinary experience begins as you step foot inside o
 ["Explore our menus often to experience the most from our kitchen."]];
 
 const mainElements =  (function() {
-    const skeletonContent = function() {
-        const contentDiv = document.getElementById('content');
-        const header = document.createElement('header')
-        const imgHeader = document.createElement('img');
+    const contentDiv = document.getElementById('content');
+    const header = document.createElement('header')
+    const imgHeader = document.createElement('img');
 
+
+    const navContainer = document.createElement('div');
+    const navBar = document.createElement('nav');
+    const navUl = document.createElement('ul');
+
+
+    let navElementsContainer = [];
+    let navAnchorContainer = [];
+
+
+    const staticContainer = document.createElement('div');
+    const mainContainer = document.createElement('div');
+
+
+    const mainParagraphs = [];
+
+    const footer = document.createElement('footer');
+    const anchorGitHub = document.createElement('a');
+
+    const skeletonContent = function() {
+        
         header.setAttribute('class', 'title');
         imgHeader.setAttribute('class', 'title-image'); 
         imgHeader.setAttribute('src', titleImg);
@@ -19,15 +40,13 @@ const mainElements =  (function() {
         header.append(imgHeader);
         
 
-        const navContainer = document.createElement('div');
+       
         navContainer.setAttribute('id', 'navigation-bar-container');
-        const navBar = document.createElement('nav');
-        const navUl = document.createElement('ul');
+        
         navContainer.append(navBar);
         navBar.append(navUl);
 
-        let navElementsContainer = [];
-        let navAnchorContainer = [];
+        
 
         for(let i = 0; i < 3; i++) {
                 navElementsContainer[i] = document.createElement('li');
@@ -40,23 +59,25 @@ const mainElements =  (function() {
             navElementsContainer[i].appendChild(navAnchorContainer[i]);
         }
         
-        navElementsContainer[0].setAttribute('id', 'home');
-        navElementsContainer[1].setAttribute('id', 'menu');  
-        navElementsContainer[2].setAttribute('id', 'contact');
+        navAnchorContainer[0].setAttribute('id', 'home');
+        navAnchorContainer[1].setAttribute('id', 'menu');  
+        navAnchorContainer[2].setAttribute('id', 'contact');
 
         navAnchorContainer[0].textContent = 'HOME';
         navAnchorContainer[1].textContent = 'MENU';
         navAnchorContainer[2].textContent = 'CONTACT';
 
+        navAnchorContainer[0].setAttribute('href', '#home');
+        navAnchorContainer[1].setAttribute('href', '#menu');
+        navAnchorContainer[2].setAttribute('href', '#contact'); 
 
-        navAnchorContainer.map(item => item.setAttribute('href', '')); 
 
-        const staticContainer = document.createElement('div');
+        
         staticContainer.setAttribute('id', 'static-container');
 
-        const mainContainer = document.createElement('div');
+        
         mainContainer.setAttribute('class', 'main-text-container')
-        const mainParagraphs = [];
+        
         
         for(let i = 0; i < mainWelcome.length; i++) {
             mainParagraphs[i] = document.createElement('p');
@@ -67,8 +88,7 @@ const mainElements =  (function() {
         staticContainer.appendChild(mainContainer);
 
 
-        const footer = document.createElement('footer');
-        const anchorGitHub = document.createElement('a');
+        
         anchorGitHub.setAttribute('href','https://github.com/lucasmblanco');
         anchorGitHub.textContent = 'GITHUB'; 
         footer.setAttribute('id', 'static-footer');
@@ -77,9 +97,9 @@ const mainElements =  (function() {
         contentDiv.append(header, navContainer, staticContainer);
         document.body.append(footer); 
         
-        
+        menuContent.test(); 
     }
-    return { skeletonContent }
+    return { skeletonContent, navAnchorContainer, staticContainer }
 }
    
 )(); 
