@@ -1,145 +1,42 @@
 import mainElements from "./main-content";
 
+const images = {};
 
+function importAll(r) {
+  r.keys().forEach((key) => (images[key] = r(key)));
+}
+
+importAll(require.context('../src/components/menu-content', false, /\.jpg/));
+
+const menuOptions = [['ANTIPASTI',"L'antipasto è un tipo di antipasto tipico della cucina italiana.\
+                    Può includere dalle specialità più elaborate dello chef a semplici come olive, affettati, diversi frutti di mare, ecc.\
+                    L'obiettivo dell'antipasto è stuzzicare l'appetito prima del pasto, senza saturare i sensi.", 
+                    images['./antipasti.jpg'],], 
+                    ['BAKED PASTA',"La nostra pasta al forno italiana con cinque ingredienti è una delle preferite dai nostri visitatori.\
+                     Include strati di pasta a scelta, tre formaggi e salsa marinara.", images['./bakedpasta.jpg'], ], 
+                    ['PESCE',"Il menu di Pesce è una miscela creativa di erbe e spezie, \ ingredienti freschi e frutti di mare locali che\
+                     aggiungono un tocco contemporaneo agli elementi della fenomenale cucina italiana.", images['./pesce.jpg'], ], 
+                    ['POLLO',"L'autentico pollo alla cacciatora è un classico italiano e non avrai mai un pasto fatto in casa più succulento di questa ricetta!.\
+                     Amati da tutta la famiglia, gli aromi del Cacciatore riempiono di comfort e calore tutta la tua casa mentre si cuoce \
+                     sui fornelli o in forno!",images['./pollo.jpg'], ], 
+                    ['INSALATA',"L'insalata è spesso giudicata per non essere un piatto coerente, ma a Sale e Pepe non crediamo che sia così. Quando fai un'insalata,\
+                     la cosa migliore è che puoi aggiungere quello che vuoi: tonno, mais, cipolla, quasi tutto. È per questo motivo che dalla cucina del ristorante vi \
+                     incoraggiamo ad amare di più questo piatto.",images['./salad.jpg'], ], 
+                    ['VITELLO',"Piatto piemontese di affettato di vitello freddo condito con una salsa cremosa simile alla maionese che è stata condita con il tonno.\
+                     Viene servito freddo oa temperatura ambiente, solitamente d'estate, come piatto unico di un pasto italiano.",images['./vitelo.jpg'], ], 
+]
 
 const menuContent = (function() {
 
-
-    const containerFoodElements = [];
-
-    const test = function() { 
-        mainElements.navAnchorContainer[1].addEventListener('click', displayMenuContent);
-    }
-
-    function displayMenuContent() { 
-        mainElements.staticContainer.textContent = ''; 
-        for(let i = 0; i < menuOptions.length; i++) {
-            containerFoodElements[i] = new Food(menuOptions[i].description, menuOptions[i].reference);
-            containerFoodElements[i].createMenuElements();
-        }
-
-        
-    }
-
-   
-    
-        /*
-        const testeando = new Food('hola', 'chau'); 
-        testeando.createMenuElements(); 
-        console.log(testeando);
-        const testeando2 = new Food('hola', 'chau'); 
-        testeando2.createMenuElements(); 
-        console.log(testeando2);
-        const testeando3 = new Food('hola', 'chau'); 
-        testeando3.createMenuElements(); 
-        console.log(testeando3);
-        const testeando4 = new Food('hola', 'chau'); 
-        testeando4.createMenuElements(); 
-        console.log(testeando4);
-        const testeando5 = new Food('hola', 'chau'); 
-        testeando5.createMenuElements(); 
-        console.log(testeando5);
-        const testeando6 = new Food('hola', 'chau'); 
-        testeando6.createMenuElements(); 
-        console.log(testeando6);
-        */
-    
-/* menu options Object 
-    const menuOptions = {
-       option1: {
-            description: 'hola',
-            reference: 'chao',
-        },
-        option2: {
-            description: 'hola2',
-            reference: 'chao2',
-        },
-        option3: {
-            description: 'hola3',
-            reference: 'chao3',
-        },
-        option4: {
-            description: 'hola4',
-            reference: 'chao4',
-        },
-        option5: {
-            description: 'hola5',
-            reference: 'chao5',
-        },
-        option6: {
-            description: 'hola6',
-            reference: 'chao6',
-        }
-    }
-*/
-
-
-/*
-    function createMenuElements() {
-        for(let i = 0; i < 6; i++) {
-            elementContainer[i] = document.createElement('div'); 
-            mainElements.staticContainer.append(elementContainer[i]);
-            elementContainer[i].classList.add('elements-container');
-            mainElements.staticContainer.setAttribute('id', 'static-container-grid'); 
-            //console.log('DIV');
-            for(let j = 0; j < 1; j++) {
-                imgContainer[i] = document.createElement('div');
-                elementContainer[i].append(imgContainer[i]);
-                imgContainer[i].classList.add('img-container');
-                //console.log('element1');
-                for(let k = 0; k < 1; k++){
-                    img[i] = document.createElement('img');
-                    imgContainer[i].append(img[i]);
-                    img[i].classList.add('food-picture');
-                    //console.log('element1.5');
-                }
-                descriptionContainer[i] = document.createElement('div'); 
-                elementContainer[i].append(descriptionContainer[i]); 
-                descriptionContainer[i].classList.add('description-container'); 
-                //console.log('element2')
-            }
-        }
-    }
-*/
-
-
-    let menuOptions = [
-         {
-            description: 'hola',
-            reference: 'chao',
-        },
-         {
-            description: 'hola2',
-            reference: 'chao2',
-        },
-         {
-            description: 'hola3',
-            reference: 'chao3',
-        },
-       {
-            description: 'hola4',
-            reference: 'chao4',
-        },
-        {
-            description: 'hola5',
-            reference: 'chao5',
-        },
-        {
-            description: 'hola6',
-            reference: 'chao6',
-        }
-    ]
-
-    
-
-    class Food {
-        constructor(description, image) {
+ class Food {
+        constructor(name, description, image, dataNumber) {
+            this.name = name;
             this.description = description;
             this.image = image; 
+     
         }
 
         createMenuElements() {
-            mainElements.staticContainer.setAttribute('id', 'static-container-grid');
             const elementContainer = document.createElement('div');
             elementContainer.classList.add('elements-container');
             mainElements.staticContainer.appendChild(elementContainer);
@@ -150,18 +47,59 @@ const menuContent = (function() {
 
             const img = document.createElement('img');
             img.classList.add('food-picture');
+    
             imgContainer.appendChild(img);
 
             const descriptionContainer = document.createElement('div');
             descriptionContainer.classList.add('description-container'); 
 
-            img.setAttribute('href', this.image);
-            descriptionContainer.textContent = this.description; 
+            const nameContainer = document.createElement('div'); 
+            nameContainer.classList.add('name-menu');
+
+            const description = document.createElement('div');
+            description.classList.add('description'); 
+
+            img.setAttribute('src',this.image);
+   
+
+            description.textContent = this.description; 
+            nameContainer.textContent = this.name;
+     
+            descriptionContainer.append(nameContainer, description);
             elementContainer.appendChild(descriptionContainer);
-         }
+        }
     }
 
-    return { test }
+
+   
+
+    const containerFoodElements = [];
+
+
+
+    const menuButtonAction = function() { 
+        const menuButton = document.querySelector('a#menu');
+        menuButton.addEventListener('click', displayMenuContent);
+    }
+
+    function displayMenuContent() { 
+
+        while(mainElements.staticContainer.firstChild && mainElements.staticContainer.removeChild(mainElements.staticContainer.firstChild));
+        for(let i = 0; i < menuOptions.length; i++) {
+   
+            containerFoodElements[i] = new Food(...menuOptions[i]);
+            containerFoodElements[i].createMenuElements();
+
+        }   
+        mainElements.staticContainer.setAttribute('id', 'static-container-grid');
+        mainElements.staticContainer.removeAttribute('class');
+        mainElements.staticContainer.classList.add('transition-different-static');
+
+        
+    }
+
+
+    return { menuButtonAction }
 })();
 
 export default menuContent
