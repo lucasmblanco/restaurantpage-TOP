@@ -87,8 +87,9 @@ const menuContent = (function() {
         while(mainElements.staticContainer.firstChild && mainElements.staticContainer.removeChild(mainElements.staticContainer.firstChild));
         for(let i = 0; i < menuOptions.length; i++) {
    
-            containerFoodElements[i] = new Food(...menuOptions[i]);
-            containerFoodElements[i].createMenuElements();
+        containerFoodElements[i] = new Food(...menuOptions[i]);
+        containerFoodElements[i].createMenuElements();
+
 
         }   
         mainElements.staticContainer.setAttribute('id', 'static-container-grid');

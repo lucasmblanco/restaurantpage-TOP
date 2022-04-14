@@ -2,6 +2,17 @@ import titleImg from './components/title/saleepepe-title.png'
 import menuContent from './menu-content';
 import contactContent from './contact-content';
 
+const restaurantImages = {}; 
+function importAll(r) {
+    r.keys().forEach((key) => (restaurantImages[key] = r(key)));
+  }
+  
+  importAll(require.context('../src/components/main-content', false, /\.jpg/));
+
+
+
+
+
 const mainWelcome = [["Your culinary experience begins as you step foot inside our old stone farmhouse. A perfectly rustic setting, for a thoughtful, local and robust culinary adventure."],
 ["Our space is divided into private dining rooms, proving a quaint and cozy setting for dining or celebrating together."],
 ["Each menu we offer is brimming with local taste experiences that are sure to delight. "],
@@ -25,6 +36,9 @@ const mainElements =  (function() {
 
             const staticContainer = document.createElement('div');
             const mainContainer = document.createElement('div');
+            const allText = document.createElement('div'); 
+            allText.classList.add('all-text'); 
+            mainContainer.append(allText);
 
 
             const mainParagraphs = [];
@@ -55,7 +69,8 @@ const mainElements =  (function() {
 
 
             const skeletonContent = function() {
-            
+
+        
             header.setAttribute('class', 'title');
             imgHeader.setAttribute('class', 'title-image'); 
             imgHeader.setAttribute('src', titleImg);
@@ -76,12 +91,13 @@ const mainElements =  (function() {
 
 
             staticContainer.setAttribute('id', 'static-container');
-            mainContainer.setAttribute('class', 'main-text-container')
+            mainContainer.setAttribute('id', 'background-change');
+            mainContainer.setAttribute('class', 'main-text-container');
             
             for(let i = 0; i < mainWelcome.length; i++) {
                 mainParagraphs[i] = document.createElement('p');
                 mainParagraphs[i].textContent = mainWelcome[i];
-                mainContainer.append(mainParagraphs[i]);
+                allText.append(mainParagraphs[i]);
             }
             
             staticContainer.appendChild(mainContainer);
@@ -108,7 +124,26 @@ const mainElements =  (function() {
                 staticContainer.append(mainElements.mainContainer);
                 mainElements.staticContainer.removeAttribute('class');
                 staticContainer.classList.add('transition-same-static');
+
+                const pElementsAnimation = document.querySelectorAll('p');
+                pElementsAnimation.forEach(p => p.classList.add('animation-item'));
             }
+
+
+        
+                function getRandomProperty(obj) {
+                    const keys = Object.values(obj);
+                    return keys[Math.floor(Math.random() * keys.length)];
+                }
+
+                function setBackground(){
+                    const backgroundMainContainer = document.getElementById('background-change');
+                    backgroundMainContainer.style.backgroundImage = `url(${getRandomProperty(restaurantImages)})`; 
+                    //backgroundMainContainer.innerHTML = "#background-change:before {background-image: `url(${getRandomProperty(restaurantImages)});}`";
+                }
+
+                setInterval(setBackground, 5000);  
+                
 
     }
     return { skeletonContent, staticContainer, mainContainer}
